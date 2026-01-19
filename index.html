@@ -698,6 +698,263 @@
             font-weight: 500;
         }
 
+        /* Educational Qualification Section */
+        .education-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto 60px;
+        }
+
+        .education-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+        }
+
+        .education-item {
+            position: relative;
+            display: flex;
+            margin-bottom: 40px;
+        }
+
+        .education-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            z-index: 2;
+            margin-right: 30px;
+            flex-shrink: 0;
+        }
+
+        .education-content {
+            flex: 1;
+            background: white;
+            padding: 25px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .education-content:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .education-header h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--dark-color);
+            margin-right: 20px;
+        }
+
+        .education-year {
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .education-content h4 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .institution-name {
+            color: var(--gray-color);
+            font-size: 1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .institution-name i {
+            color: var(--accent-color);
+        }
+
+        .education-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 15px;
+        }
+
+        .grade-info, .equivalent-class {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .grade-label, .lebanon-label {
+            font-size: 0.9rem;
+            color: var(--gray-color);
+            font-weight: 500;
+        }
+
+        .grade-value, .lebanon-class {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .lebanon-class {
+            color: var(--secondary-color);
+        }
+
+        /* Complete Projects Section */
+        .projects {
+            background-color: #f8fafc;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(37, 99, 235, 0.2), rgba(6, 182, 212, 0.3));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-view-btn {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .project-view-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        .project-content p {
+            color: var(--gray-color);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background: linear-gradient(45deg, #f0f9ff, #e0f2fe);
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--secondary-color);
+            gap: 12px;
+        }
+
         /* Skills Section */
         .skills {
             background-color: #f8fafc;
@@ -1095,6 +1352,16 @@
             .contact-content {
                 flex-direction: column;
             }
+            
+            .education-timeline::before {
+                left: 35px;
+            }
+            
+            .education-icon {
+                width: 60px;
+                height: 60px;
+                margin-right: 20px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1161,6 +1428,30 @@
                 left: 10px;
                 max-width: none;
             }
+            
+            .education-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .education-year {
+                align-self: flex-start;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .education-timeline::before {
+                left: 30px;
+            }
+            
+            .education-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                margin-right: 15px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1206,6 +1497,15 @@
             .philosophy-card {
                 padding: 25px;
             }
+            
+            .education-content {
+                padding: 20px;
+            }
+            
+            .education-details {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
     </style>
 </head>
@@ -1234,6 +1534,8 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -1257,7 +1559,7 @@
                     <p class="hero-description">I turn ideas into simple, functional digital solutions.</p>
                     <div class="hero-buttons">
                         <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                        <a href="#experience" class="btn btn-secondary">View My Work</a>
+                        <a href="#projects" class="btn btn-secondary">View My Projects</a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -1395,6 +1697,145 @@
                         <div style="font-size: 0.9rem; color: #64748b; margin-top: 10px;">
                             <i class="fas fa-clock"></i> Always ready
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Educational Qualification Section -->
+    <section id="education" class="section education">
+        <div class="container">
+            <h2 class="section-title">Educational Qualification</h2>
+            
+            <div class="education-timeline">
+                <div class="education-item">
+                    <div class="education-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="education-content">
+                        <div class="education-header">
+                            <h3>Secondary School Certificate (SSC)</h3>
+                            <span class="education-year">2014 - 2016</span>
+                        </div>
+                        <h4>Science Group</h4>
+                        <p class="institution-name"><i class="fas fa-school"></i> Ratanpur M.L. High School, Noakhali, Bangladesh</p>
+                        <div class="education-details">
+                            <div class="grade-info">
+                                <span class="grade-label">GPA:</span>
+                                <span class="grade-value">4.94 / 5.00</span>
+                            </div>
+                            <div class="equivalent-class">
+                                <span class="lebanon-label">Lebanese Equivalent:</span>
+                                <span class="lebanon-class">Brevet (Grade 9)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="education-content">
+                        <div class="education-header">
+                            <h3>Higher Secondary Certificate (HSC)</h3>
+                            <span class="education-year">2016 - 2018</span>
+                        </div>
+                        <h4>Science Group</h4>
+                        <p class="institution-name"><i class="fas fa-university"></i> Noakhali Government College, Noakhali, Bangladesh</p>
+                        <div class="education-details">
+                            <div class="grade-info">
+                                <span class="grade-label">GPA:</span>
+                                <span class="grade-value">4.75 / 5.00</span>
+                            </div>
+                            <div class="equivalent-class">
+                                <span class="lebanon-label">Lebanese Equivalent:</span>
+                                <span class="lebanon-class">Baccalaureate (Grade 12)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="education-content">
+                        <div class="education-header">
+                            <h3>Bachelor of Science (BSc)</h3>
+                            <span class="education-year">2018 - 2022</span>
+                        </div>
+                        <h4>Textile Engineering</h4>
+                        <p class="institution-name"><i class="fas fa-graduation-cap"></i> Southeast University, Dhaka, Bangladesh</p>
+                        <div class="education-details">
+                            <div class="grade-info">
+                                <span class="grade-label">CGPA:</span>
+                                <span class="grade-value">3.25 / 4.00</span>
+                            </div>
+                            <div class="equivalent-class">
+                                <span class="lebanon-label">Lebanese Equivalent:</span>
+                                <span class="lebanon-class">Bachelor's Degree (University Level)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Complete Projects Section -->
+    <section id="projects" class="section projects">
+        <div class="container">
+            <h2 class="section-title">My Complete Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="E-Commerce Website">
+                        <div class="project-overlay">
+                            <a href="https://mdhridoy3805-ux.github.io/Mosjid_prayer_time/" class="project-view-btn" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Prayer Timer</h3>
+                        <p>A fully responsive e-commerce platform with product catalog, shopping cart, and checkout system. Built with HTML, CSS, and JavaScript.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Responsive Design</span>
+                        </div>
+                        <a href="YOUR_PROJECT1_HTML_LINK_HERE" class="project-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Open Project 1
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Portfolio Website">
+                        <div class="project-overlay">
+                            <a href="https://mdhridoy3805-ux.github.io/telecom-business/" class="project-view-btn" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Telecom Management</h3>
+                        <p>A modern and responsive portfolio website showcasing my skills, projects, and experience. Features smooth animations and clean design.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">GitHub Pages</span>
+                        </div>
+                        <a href="YOUR_PROJECT2_HTML_LINK_HERE" class="project-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Open Project 2
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1979,6 +2420,18 @@
                 
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Project links - You need to update these with your actual project links
+            const projectLinks = document.querySelectorAll('.project-link, .project-view-btn');
+            projectLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === 'YOUR_PROJECT1_HTML_LINK_HERE' || href === 'YOUR_PROJECT2_HTML_LINK_HERE') {
+                        e.preventDefault();
+                        alert('Please update the project links in the HTML code with your actual project file URLs.');
+                    }
                 });
             });
             
