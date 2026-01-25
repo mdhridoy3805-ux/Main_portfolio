@@ -2178,10 +2178,8 @@
         // EmailJS Initialization
         (function() {
             // Initialize EmailJS with your Public Key
-            // Sign up at https://www.emailjs.com/ to get your keys
             emailjs.init("7sa7S18GcqrmF1twt");
-            
-            console.log("EmailJS initialized. Please add your Public Key.");
+            console.log("EmailJS initialized successfully!");
         })();
 
         // Welcome Popup Functionality
@@ -2306,12 +2304,11 @@
                     };
                     
                     // Send email using EmailJS
-                    // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual IDs
                     const response = await emailjs.send(
-     						  'YOUR_SERVICE_ID',    // service_zd99a8i
-    							'YOUR_TEMPLATE_ID',   // __ejs-test-mail-service__
-   							 templateParams        // 
-                        );
+                        'service_zd99a8i',    // Service ID
+                        '__ejs-test-mail-service__',   // Template ID
+                        templateParams
+                    );
                     
                     if (response.status === 200) {
                         // Success
@@ -2537,18 +2534,10 @@
             });
             
             console.log('Portfolio loaded successfully!');
-            
-            // EmailJS setup instructions
-            console.log('=== EmailJS Setup Instructions ===');
-            console.log('1. Go to https://www.emailjs.com/ and sign up');
-            console.log('2. Add your Gmail/email service');
-            console.log('3. Create an email template');
-            console.log('4. Get your:');
-            console.log('   - Public Key');
-            console.log('   - Service ID');
-            console.log('   - Template ID');
-            console.log('5. Update the JavaScript code with your keys');
-            console.log('6. Test the contact form');
+            console.log('EmailJS Configured:');
+            console.log('- Public Key: 7sa7S18GcqrmF1twt');
+            console.log('- Service ID: service_zd99a8i');
+            console.log('- Template ID: __ejs-test-mail-service__');
         });
     </script>
 </body>
