@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- EmailJS Library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         /* ===== CSS STYLES ===== */
         * {
@@ -1245,6 +1247,28 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
+        /* Form Status Message */
+        .form-status {
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 20px;
+            display: none;
+        }
+
+        .form-status.success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+            display: block;
+        }
+
+        .form-status.error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+            display: block;
+        }
+
         /* Footer */
         .footer {
             background-color: var(--dark-color);
@@ -1808,7 +1832,7 @@
                             <span class="tech-tag">JavaScript</span>
                             <span class="tech-tag">Responsive Design</span>
                         </div>
-                        <a href="YOUR_PROJECT1_HTML_LINK_HERE" class="project-link" target="_blank">
+                        <a href="https://mdhridoy3805-ux.github.io/Mosjid_prayer_time/" class="project-link" target="_blank">
                             <i class="fas fa-external-link-alt"></i> Open Project 1
                         </a>
                     </div>
@@ -1833,7 +1857,7 @@
                             <span class="tech-tag">JavaScript</span>
                             <span class="tech-tag">GitHub Pages</span>
                         </div>
-                        <a href="YOUR_PROJECT2_HTML_LINK_HERE" class="project-link" target="_blank">
+                        <a href="https://mdhridoy3805-ux.github.io/telecom-business/" class="project-link" target="_blank">
                             <i class="fas fa-external-link-alt"></i> Open Project 2
                         </a>
                     </div>
@@ -2085,20 +2109,35 @@
                 <div class="contact-form">
                     <h3>Send a Message</h3>
                     <p>Feel free to contact me for any opportunities or collaborations</p>
+                    
+                    <!-- EmailJS Form -->
                     <form id="contactForm">
                         <div class="form-group">
-                            <input type="text" id="name" placeholder="Your Name" required>
+                            <input type="text" id="name" name="from_name" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" placeholder="Your Email" required>
+                            <input type="email" id="email" name="from_email" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" id="subject" placeholder="Subject" required>
+                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
                         </div>
                         <div class="form-group">
-                            <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+                            <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        
+                        <!-- Hidden fields -->
+                        <input type="hidden" name="to_name" value="Shamsu Uddin Redoy">
+                        <input type="hidden" name="to_email" value="Mdhridoy3805@gmail.com">
+                        
+                        <!-- Form Status Message -->
+                        <div id="formStatus" class="form-status"></div>
+                        
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <span id="btnText">Send Message</span>
+                            <span id="btnLoading" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Sending...
+                            </span>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -2124,7 +2163,7 @@
                     <a href="mailto:mdhridoy3805@gmail.com" class="gmail" title="Gmail">
                         <i class="fas fa-envelope"></i>
                     </a>
-                    <a href="https://github.com" target="_blank" class="github" title="GitHub">
+                    <a href="https://github.com/mdhridoy3805-ux" target="_blank" class="github" title="GitHub">
                         <i class="fab fa-github"></i>
                     </a>
                 </div>
@@ -2136,6 +2175,15 @@
 
     <!-- ===== JAVASCRIPT ===== -->
     <script>
+        // EmailJS Initialization
+        (function() {
+            // Initialize EmailJS with your Public Key
+            // Sign up at https://www.emailjs.com/ to get your keys
+            emailjs.init("7sa7S18GcqrmF1twt");
+            
+            console.log("EmailJS initialized. Please add your Public Key.");
+        })();
+
         // Welcome Popup Functionality
         document.addEventListener('DOMContentLoaded', function() {
             const welcomePopup = document.getElementById('welcomePopup');
@@ -2210,10 +2258,15 @@
             });
         });
 
-        // Contact form submission
+        // Contact form submission with EmailJS
         const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnLoading = document.getElementById('btnLoading');
+
         if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
+            contactForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 // Get form values
@@ -2224,17 +2277,74 @@
                 
                 // Simple validation
                 if (!name || !email || !message) {
-                    alert('Please fill in all required fields.');
+                    showFormStatus('Please fill in all required fields.', 'error');
                     return;
                 }
                 
-                // In a real implementation, you would send this data to a server
-                // For now, we'll just show an alert
-                alert(`Thank you for your message, ${name}! I will get back to you soon at ${email}.`);
+                // Email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    showFormStatus('Please enter a valid email address.', 'error');
+                    return;
+                }
                 
-                // Reset the form
-                contactForm.reset();
+                // Show loading state
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline';
+                submitBtn.disabled = true;
+                
+                try {
+                    // Prepare template parameters
+                    const templateParams = {
+                        from_name: name,
+                        from_email: email,
+                        subject: subject,
+                        message: message,
+                        to_name: 'Shamsu Uddin Redoy',
+                        to_email: 'Mdhridoy3805@gmail.com',
+                        date: new Date().toLocaleString()
+                    };
+                    
+                    // Send email using EmailJS
+                    // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual IDs
+                    const response = await emailjs.send(
+                        'YOUR_SERVICE_ID',  // service_zd99a8i Service ID
+                        'YOUR_TEMPLATE_ID', //7sa7S18GcqrmF1twt Template ID
+                        templateParams
+                    );
+                    
+                    if (response.status === 200) {
+                        // Success
+                        showFormStatus('Thank you for your message! I will get back to you soon.', 'success');
+                        contactForm.reset();
+                    } else {
+                        // Error from EmailJS
+                        showFormStatus('Sorry, there was an error sending your message. Please try again later.', 'error');
+                        console.error('EmailJS error:', response);
+                    }
+                } catch (error) {
+                    // Network or other error
+                    showFormStatus('Failed to send message. Please try again or contact me directly at Mdhridoy3805@gmail.com', 'error');
+                    console.error('Error:', error);
+                } finally {
+                    // Reset button state
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+                    
+                    // Auto-hide status message after 5 seconds
+                    setTimeout(() => {
+                        formStatus.style.display = 'none';
+                    }, 5000);
+                }
             });
+        }
+
+        // Show form status message
+        function showFormStatus(message, type) {
+            formStatus.textContent = message;
+            formStatus.className = 'form-status ' + type;
+            formStatus.style.display = 'block';
         }
 
         // Animate skill bars when they come into view
@@ -2409,7 +2519,10 @@
             });
             
             // Initialize - Add active class to first nav link
-            document.querySelector('.nav-links a').classList.add('active');
+            const firstNavLink = document.querySelector('.nav-links a');
+            if (firstNavLink) {
+                firstNavLink.classList.add('active');
+            }
             
             // Add hover effect to stat cards
             const statCards = document.querySelectorAll('.stat-card');
@@ -2423,19 +2536,19 @@
                 });
             });
             
-            // Project links - You need to update these with your actual project links
-            const projectLinks = document.querySelectorAll('.project-link, .project-view-btn');
-            projectLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href === 'YOUR_PROJECT1_HTML_LINK_HERE' || href === 'YOUR_PROJECT2_HTML_LINK_HERE') {
-                        e.preventDefault();
-                        alert('Please update the project links in the HTML code with your actual project file URLs.');
-                    }
-                });
-            });
-            
             console.log('Portfolio loaded successfully!');
+            
+            // EmailJS setup instructions
+            console.log('=== EmailJS Setup Instructions ===');
+            console.log('1. Go to https://www.emailjs.com/ and sign up');
+            console.log('2. Add your Gmail/email service');
+            console.log('3. Create an email template');
+            console.log('4. Get your:');
+            console.log('   - Public Key');
+            console.log('   - Service ID');
+            console.log('   - Template ID');
+            console.log('5. Update the JavaScript code with your keys');
+            console.log('6. Test the contact form');
         });
     </script>
 </body>
